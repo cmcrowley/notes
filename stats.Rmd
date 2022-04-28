@@ -19,10 +19,18 @@ extra_dependencies:
   - Independence
   If the conditional probability of A|B equals the unconditional probability of A then A is independent of B. 
 $$ P(A|B)=P(A) \implies P(A\cap B) = P(A)P(B) $$
-  Note that the second equation results from multiplying both sides of \ref{cp}
+  Note that the second equation results from multiplying both sides of \ref{cp}. The probabilities of combinations of independent events are multiplicative.
   
 - Unconditional probability
 $$ P(A)=P(A|B) + P(A | not B) $$
+
+#### Deriving Bayes Rule
+Most usage: to go from $P(D|H)$ (the likelihood of the data assuming the hypothesis is true) to what we want to know $P(H|D)$
+$$P(H|D) = \frac{P(D\cap H)}{P(D)} = \frac{P(D|H)P(H)}{P(D)}$$
+The probability of the hypothesis given the data is equal to the probability of the data given the hypothesis (the likelihood) times the probability of the hypothesis divided by the probability of the data. Raises two problems:
+1. What is $P|H$?
+2. What is the unconditional probability of the data, $P(D)$?
+  - This is caclulatable if we have an exhaustive set of mutually exclusive hypotheses.
 
 
 # On randomness, probability distributions
@@ -34,4 +42,13 @@ $$ P(A)=P(A|B) + P(A | not B) $$
   - Damselfish system (ch. 2), the number of recruits in any given cohort is the number of settlers surviving density-dependent mortality, but the average number of recruits is lower than expected from an average-sized cohort of settlers because large cohorts suffer disproportionately high mortality and contribute relatively little to the average. 
   -   Q: then where does the 'expected' value of recruits come from?
     - follows from Jensen's inequality (ruel and Ayres, 1999; Inouye, 2005)
+    
+#### Deriving a zero-inflated binomial distribution (using simple probability rules)
 
+
+
+# Questions that pop up
+- Is a Poisson-modeled variable really a binomial-process variable with less knowledge (number of events without knowledge of number of trials).
+
+# Citations
+- Ecological Models and Data in R by Ben Bolker
