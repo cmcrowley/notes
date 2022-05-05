@@ -30,11 +30,11 @@ $$P(H|D) = \frac{P(D\cap H)}{P(D)} = \frac{P(D|H)P(H)}{P(D)}$$
 The probability of the hypothesis given the data is equal to the probability of the data given the hypothesis (the likelihood) times the probability of the hypothesis divided by the probability of the data. Raises two problems:
 1. What is $P|H$?
 2. What is the unconditional probability of the data, $P(D)$?
-  - This is caclulatable if we have an exhaustive set of mutually exclusive hypotheses.
+  - This is caclulatable if we have an *exhaustive* set of *mutually exclusive* hypotheses.
 
 
 # On randomness, probability distributions
-### EMD Chapter 4
+## EMD Chapter 4
 
 - "Unfortunately, classical nonparametric approaches makei t much harder to draw quantitative conclusions from data (rather than simply rejecting or failing to reject null hypotheses about differences between groups")
 - Stochastic models don't just treat variability as a nuisance, but actually tells us something about processes. For ex., cenusus counts that follow a negative binomial distribution tell us there is some form of environmental variation or aggregative response among individuals that we haven't taken into account. (Shaw and Dobson, 1995)
@@ -43,12 +43,27 @@ The probability of the hypothesis given the data is equal to the probability of 
   -   Q: then where does the 'expected' value of recruits come from?
     - follows from Jensen's inequality (ruel and Ayres, 1999; Inouye, 2005)
     
-#### Deriving a zero-inflated binomial distribution (using simple probability rules)
+### Deriving a zero-inflated binomial distribution (using simple probability rules)
 
 
+### Poisson distribution
+- variance is equal to the mean = expected number of counts = $\lambda$.
+- alternative parameterization gives a density per unit sampling effort and then specifies the mean as the product of the density per sampling effort $r$ and the sampling effort $t$; $\lambda = rt$.
+- coefficient of variation CV=sd/mean decreases as the mean increases, "so in that sense the Poisson distribution becomes more regular as the expected number of counts increases" Q: what is meant by 'more regular'?
+- For $\lambda <1$ the Poisson mode is 0. When $\lambda$ gets large (Bolker: e.g., > 10), the Poisson becomes approximately normal.
+
+### Negative bionomial distribution
+- The distribution of the number of failures before a predetermined number of successes occurs. 
+- Bolker: "The 'ecological' parameterization replaces the parameters $p$ (probability of success per trial; `prob`) and $n$ (the number of successes before you stop counting failures; `size`) with $\mu = n(1-p)/p$, the mean number of failures expected (or of counts in a sample); `mu`, and $k$, an overdispersion parameter; also `size` because it is mathematically equivalent to $n$ in the failure-process parameterization"
+- The overdispersion parameter measures the amount of clustering/aggregation/heterogeneity in the data: a smaller $k$ implies more heterogeneity
+- For $K>10$ the eng. binom is hard to tell from a Poisson.
+- You can get a negative binomial distribution as the result of a Poisson sampling process where $\lambda$ varies
+  - If $lambda \sim Gamma(shape=k, mean=\mu)$, and $x \sim Pois(\lambda)$, then $x \sim NegBinom(mean=\mu, overdispersion=k)$.
+  
 
 # Questions that pop up
-- Is a Poisson-modeled variable really a binomial-process variable with less knowledge (number of events without knowledge of number of trials).
+- Is a Poisson-modeled variable just a binomial-process variable with less knowledge (number of events without knowledge of number of trials).
+  - Bolker p. 163: "The Poisson distribution has no upper limit, although values much larger than the mean are highly improbable. This characteristic provides a rule fo rchoosing between the binomial and Poisson. If you expect to observe a "ceiling" on the number of counts, you should use the binomial; if you expect the number of counts to be effectively unlimited, even if it is theoretically bounded (e.g., there can't really be an infiniate number of plants in your sampling quadrat), use the Poisson."
 
 # Citations
 - Ecological Models and Data in R by Ben Bolker
